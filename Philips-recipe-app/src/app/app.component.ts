@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RecipeService } from './recipe.service';
+import { Recipe } from './recipe'
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,16 @@ import { RecipeService } from './recipe.service';
 })
 export class AppComponent {
   title = 'Philips-recipe-app';
-  search: string;
+  search: any;
+  recipes: Recipe[];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService) { }
 
   public searchRecipes(): void {
-    this.recipeService.getRecipes(this.search);
+    this.recipeService.getRecipes(this.search)
+      .subscribe(res => {
+        this.recipes = res.hits.map((hit: any) => (hit.recipe))
+        console.log(this.recipes)
+      });
   }
 }

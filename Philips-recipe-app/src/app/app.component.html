@@ -5,6 +5,17 @@
   </h1>
   <input type="text" [(ngModel)]="search" />
   <button (click)="searchRecipes()">SEARCH BRUH</button>
+  <ng-container *ngFor="let recipe of recipes">
+  <ul>
+    <li>
+      <h3>{{ recipe.label }}</h3>
+      <h4>{{ recipe.dietLabels }}</h4>
+      <h4>{{ recipe.cautions }}</h4>
+      <h4>{{ recipe.healthLabels }}</h4>
+      <p>ingredients count: {{ recipe.ingredients.length }}.</p>
+     <img src="{{ recipe.image }}" /> 
+    </li>
+  </ul>
+</ng-container>
 </div>
-
 <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 import { Injectable, APP_ID } from '@angular/core';
-import { Recipe } from './recipe'
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,7 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  getRecipes(searchString): Recipe[] {
-    this.http.get(`https://api.edamam.com/search?app_id=${this.APP_ID}&app_key=${this.API_KEY}&q=${searchString}`)
-      .subscribe(val => console.log(val));
-    return [new Recipe()]
+  getRecipes(searchString: string): Observable<Object> {
+    return this.http.get(`https://api.edamam.com/search?app_id=${this.APP_ID}&app_key=${this.API_KEY}&q=${searchString}`)
   }
 }
